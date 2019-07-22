@@ -4,6 +4,16 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    selected: "profile"
+  }
+
+  changeSelected = (selection) => {
+    this.setState({
+      selected: selection
+    })
+  }
+
 
   render() {
 
@@ -13,12 +23,30 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    let details;
+
+    switch (this.state.selected) {
+      case "profile":
+        details = <Profile />
+        break;
+      case "photo":
+        details = <Photos />
+        break;
+      case "cocktails":
+        details = <Cocktails />
+        break;
+      case "pokemon":
+        details = <Pokemon />
+        break;
+      default:
+        details = null
+        break;
+    }
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar changeSelected={this.changeSelected} selected={this.state.selected} />
+        {details}
       </div>
     )
   }

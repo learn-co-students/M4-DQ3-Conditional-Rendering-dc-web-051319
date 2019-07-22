@@ -13,23 +13,31 @@ const MenuBar = (props) => {
 
   */
 
+  const handleClick = (event) => {
+    props.changeSelected(event.target.id)
+  }
+
+  const pages = [
+    {name: "profile", icon: "user large icon"}, 
+    {name: "photo", icon: "photo large icon"}, 
+    {name: "cocktail", icon: "cocktail large icon"}, 
+    {name: "pokemon", icon: "themeisle large icon"}
+  ]
+
   return (
     <div className="ui four item menu">
-      <a className="item active" id="profile">
-        <i className="user large icon" id="profile"/>
-      </a>
 
-      <a className="item" id="photo">
-        <i className="photo large icon" id="photo"/>
-      </a>
-
-      <a className="item" id="cocktail">
-        <i className="cocktail large icon" id="cocktail"/>
-      </a>
-
-      <a className="item" id="pokemon"> 
-        <i className=" themeisle large icon" id="pokemon"/>
-      </a>
+      {
+        pages.map(page => {
+          return (
+            <a className={"item " + (props.selected === page.name ? "active" : null)} 
+              id={page.name}
+              onClick={handleClick}>
+              <i className={page.icon} id={page.name}/>
+            </a>
+          )
+        })
+      }
     </div>
   )
 
